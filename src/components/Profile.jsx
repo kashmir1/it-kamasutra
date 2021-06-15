@@ -1,9 +1,9 @@
 import React from "react";
-
+import classes from './Profile.module.css'
 const Profile = () => {
-  return <div className="content">
+  return <div className={classes.content}>
       <div>
-          <img src="https://64.media.tumblr.com/a990d238cf756f56964e17624ae6bed5/52003e8c5f19579d-fb/s1280x1920/225979697602a6e7fbaa6c18b57587879c526806.jpg" alt=""/>
+          <img className={classes.mainImg} src="https://eva-not-end.com/Portal/uploads/gallery/category_9/gallery_22897_9_1077695.jpg" alt=""/>
       </div>
       <div>
           avatar + description
