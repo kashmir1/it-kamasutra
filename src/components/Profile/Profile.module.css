@@ -1,9 +1,4 @@
 
-.content {
-    grid-area: c;
-    background-color: brown;
-}
-
 .mainImg {
     max-width: 900px;
     height: 200px;
