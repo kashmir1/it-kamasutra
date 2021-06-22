@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
     return <nav className={classes.nav}>
+        {/*activeClassName добавляет активный класс*/}
         {/*<div><NavLink className={`${classes.item} ${classes.active}`} activeClassName={classes.active} to="/profile">Profile</NavLink></div>*/}
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/profile">Profile</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/messages">Messages</NavLink></div>
