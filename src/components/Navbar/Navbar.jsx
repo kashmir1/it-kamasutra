@@ -7,7 +7,7 @@ const Navbar = () => {
         {/*activeClassName добавляет активный класс*/}
         {/*<div><NavLink className={`${classes.item} ${classes.active}`} activeClassName={classes.active} to="/profile">Profile</NavLink></div>*/}
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/profile">Profile</NavLink></div>
-        <div><NavLink className={classes.item} activeClassName={classes.active} to="/messages">Messages</NavLink></div>
+        <div><NavLink className={classes.item} activeClassName={classes.active} to="/dialogs">Messages</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/news">News</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/musics">Music</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/settings">Settings</NavLink></div>
