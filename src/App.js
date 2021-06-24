@@ -10,6 +10,7 @@ import Musics from "./components/Musics/Musics";
 import Settings from "./components/Settings/Settings";
 
 
+
 const App = () => {
         return (
             <BrowserRouter>
