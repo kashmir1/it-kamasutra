@@ -4,11 +4,16 @@ import Post from "./Post/Post";
 
 const MyPosts = () => {
 
-    let postsData = [
+    let posts = [
         {message: 'Go Eva!', likeCount: '18'},
         {message: 'Wake up Sindzy!', likeCount: 12},
         {message: 'Wake up!', likeCount: 122},
     ];
+
+    let postsElements = posts.map(p => <Post
+        message={p.message}
+        likeCount={p.likeCount}
+    />);
 
     return <div className={classes.postsWrapper}>
         <h3>My posts</h3>
@@ -17,18 +22,8 @@ const MyPosts = () => {
             <button>New post</button>
         </div>
         <div>
-            <Post
-                message={postsData[0].message}
-                likeCount={postsData[0].likeCount}
-            />
-            <Post
-                message={postsData[1].message}
-                likeCount={postsData[1].likeCount}
-            />
-            <Post
-                message={postsData[2].message}
-                likeCount={postsData[2].likeCount}
-            />
+            {postsElements}
+
         </div>
     </div>
 };
