@@ -1,0 +1,15 @@
+
+.nav {
+    padding: 20px;
+    grid-area: n;
+    background-color: aquamarine;
+}
+
+.item {
+    color: hotpink;
+    text-decoration: none;
+}
+
+.active {
+    color: firebrick;
+}
