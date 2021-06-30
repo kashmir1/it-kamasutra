@@ -9,11 +9,18 @@ const MyPosts = (props) => {
         likeCount={p.likeCount}
     />);
 
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        let text = newPostElement.current.value;
+        alert(text)
+    };
+
     return <div className={classes.postsWrapper}>
         <h3>My posts</h3>
-        <div><textarea name="" id="" cols="30" rows="10"></textarea></div>
+        <div><textarea ref={newPostElement} name="" id="" cols="30" rows="10"></textarea></div>
         <div>
-            <button>New post</button>
+            <button onClick={addPost}>New post</button>
         </div>
         <div>
             {postsElements}
