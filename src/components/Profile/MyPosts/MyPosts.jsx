@@ -12,13 +12,22 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text)
+        props.addPost();
     };
+
+    let onPostChante = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text);
+    };
+
 
     return <div className={classes.postsWrapper}>
         <h3>My posts</h3>
-        <div><textarea ref={newPostElement} name="" id="" cols="30" rows="10"></textarea></div>
+        <div><textarea
+            ref={newPostElement}
+            value={props.newPostText}
+            onChange={onPostChante}
+        /></div>
         <div>
             <button onClick={addPost}>New post</button>
         </div>
