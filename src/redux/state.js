@@ -1,4 +1,6 @@
-import {renderEntireTree} from "../render";
+let renderEntireTree = () => {
+    console.log('state is updated')
+};
 
 let state = {
     messagesPage: {

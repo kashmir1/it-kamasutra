@@ -1,8 +1,25 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {renderEntireTree} from "./render";
-import state from "./redux/state";
+import state, {addMessage, addPost, updateNewMessageText, updateNewPostText} from "./redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+const renderEntireTree = () => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App
+                state={state}
+                addPost={addPost}
+                updateNewPostText={updateNewPostText}
+                addMessage={addMessage}
+                updateNewMessageText={updateNewMessageText}
+            />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+};
+
 
 renderEntireTree(state);
 
