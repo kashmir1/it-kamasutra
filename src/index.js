@@ -1,11 +1,10 @@
 import React from 'react';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
-import state, {addMessage, addPost, updateNewMessageText, updateNewPostText} from "./redux/state";
+import state, {addMessage, addPost, subscribe, updateNewMessageText, updateNewPostText} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 
-const renderEntireTree = () => {
+const rerenderEntireTree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
@@ -21,7 +20,12 @@ const renderEntireTree = () => {
 };
 
 
-renderEntireTree(state);
+
+rerenderEntireTree(state);
+// Observer.addObserver(rerenderEntireTree);
+
+// передаем нашему обсерверу функцию ререндера
+subscribe(rerenderEntireTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

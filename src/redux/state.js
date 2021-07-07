@@ -1,4 +1,5 @@
-let renderEntireTree = () => {
+// Объявляем функцию заглушку для обсервера
+let rerenderEntireTree = () => {
     console.log('state is updated')
 };
 
@@ -46,12 +47,12 @@ export let addPost = () => {
 
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = '';
-    renderEntireTree(state)
+    rerenderEntireTree(state)
 };
 
 export let updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
-    renderEntireTree(state)
+    rerenderEntireTree(state)
 };
 
 export let addMessage = () => {
@@ -62,12 +63,31 @@ export let addMessage = () => {
 
     state.messagesPage.messages.push(newMessage);
     state.messagesPage.newPostMessage = '';
-    renderEntireTree(state)
+    rerenderEntireTree(state)
 };
 
 export let updateNewMessageText = (newText) => {
     state.messagesPage.newPostMessage = newText;
-    renderEntireTree(state)
+    rerenderEntireTree(state)
 };
+
+
+// export const Observer = {
+//     addObserver(newObserver) {
+//         rerenderEntireTree = newObserver;
+//     },
+// };
+
+// Создаем функцию обсервер
+export const subscribe = (observer) => {
+    // функции заглушки присваиваем значение observer и она ссылается на него
+    rerenderEntireTree = observer;
+};
+
+
+// В state мы не можем импортировать функцию renderEntireTree, но мы можем ее туда передать через subscribe,
+// который вызывается в index.js. После чего, созданная функция renderEntireTree в state
+// переопределяется на ту, которую мы передали в subscribe. И теперь, когда мы добавляем пост,
+// в state вызывается эта функция renderEntireTree
 
 export default state;
