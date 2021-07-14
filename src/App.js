@@ -8,7 +8,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Musics from "./components/Musics/Musics";
 import Settings from "./components/Settings/Settings";
-import {addMessage, updateNewMessageText} from "./redux/state";
 
 const App = (props) => {
 
@@ -23,8 +22,7 @@ const App = (props) => {
                         <Route path='/dialogs' render={ () =>
                             <Dialogs
                                 state={props.state.messagesPage}
-                                addMessage={props.addMessage}
-                                updateNewMessageText={props.updateNewMessageText}
+                                dispatch={props.dispatch}
                                 newPostMessage={props.state.messagesPage.newPostMessage}
                             />
                         }/>
