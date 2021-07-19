@@ -56,21 +56,6 @@ export let store = {
     // переопределяется на ту, которую мы передали в subscribe. И теперь, когда мы добавляем пост,
     // в state вызывается эта функция renderEntireTree
 
-    addMessage() {
-        let newMessage = {
-            id: 3,
-            message: this._state.messagesPage.newPostMessage,
-        };
-
-        this._state.messagesPage.messages.push(newMessage);
-        this._state.messagesPage.newPostMessage = '';
-        this._callbackSubscriber(this._state)
-    },
-    updateNewMessageText(newText) {
-        this._state.messagesPage.newPostMessage = newText;
-        this._callbackSubscriber(this._state)
-    },
-
     dispatch(action) {
         if (action.type === ADD_POST) {
             // action - это объект, у которого обязательно есть свойство type
@@ -86,9 +71,7 @@ export let store = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callbackSubscriber(this._state)
-        }
-
-        if (action.type === ADD_MESSAGE) {
+        } else if (action.type === ADD_MESSAGE) {
             let newMessage = {
                 id: 3,
                 message: this._state.messagesPage.newPostMessage,
