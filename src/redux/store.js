@@ -62,6 +62,4 @@ export let store = {
     }
 };
 
-
-
 export default store;

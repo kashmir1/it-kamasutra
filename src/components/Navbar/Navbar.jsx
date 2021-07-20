@@ -13,7 +13,8 @@ const Navbar = (props) => {
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/musics">Music</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/settings">Settings</NavLink></div>
         <Sidebar
-            friends={props.sidebar.friends}
+            sidebar={props.sidebar.friends}
+            dispatch={props.dispatch}
         />
     </nav>
 };
