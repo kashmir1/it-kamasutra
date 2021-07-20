@@ -1,3 +1,8 @@
+import profileReducer from "./profile-reducer";
+import dialogReducer from "./dialog-reducer";
+import sidebarReducer from "./sidebar-reducer";
+import {act} from "@testing-library/react";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE';
@@ -57,33 +62,10 @@ export let store = {
     // в state вызывается эта функция renderEntireTree
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            // action - это объект, у которого обязательно есть свойство type
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likeCount: 0
-            };
-
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callbackSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callbackSubscriber(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: 3,
-                message: this._state.messagesPage.newPostMessage,
-            };
-
-            this._state.messagesPage.messages.push(newMessage);
-            this._state.messagesPage.newPostMessage = '';
-            this._callbackSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.messagesPage.newPostMessage = action.newText;
-            this._callbackSubscriber(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = dialogReducer(this._state.messagesPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._callbackSubscriber(this._state)
     }
 };
 
