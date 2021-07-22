@@ -2,7 +2,7 @@ import profileReducer from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-export let store = {
+let store = {
     _state: {
         messagesPage: {
             dialogs: [
@@ -63,3 +63,4 @@ export let store = {
 };
 
 export default store;
+window.store = store;
