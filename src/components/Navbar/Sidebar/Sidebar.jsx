@@ -1,7 +1,6 @@
 import React from "react";
 
 const Sidebar = (props) => {
-    debugger
 
     let friendList = props.sidebar.map(friend =>
         <div>

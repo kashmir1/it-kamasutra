@@ -12,10 +12,10 @@ const Navbar = (props) => {
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/news">News</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/musics">Music</NavLink></div>
         <div><NavLink className={classes.item} activeClassName={classes.active} to="/settings">Settings</NavLink></div>
-        <Sidebar
-            sidebar={props.sidebar.friends}
-            dispatch={props.dispatch}
-        />
+        {/*<Sidebar*/}
+        {/*    sidebar={props.sidebar.friends}*/}
+        {/*    dispatch={props.dispatch}*/}
+        {/*/>*/}
     </nav>
 };
 
