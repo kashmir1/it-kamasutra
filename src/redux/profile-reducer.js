@@ -12,19 +12,29 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {
                 id: 3,
                 message: state.newPostText,
                 likeCount: 0
             };
 
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state; // ретурним стейт чтобы не ставить брейк
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            // делаем копию стейта чтобы не нарушать принцип имьютабельности
+            return {
+                ...state,
+                posts: [...state.posts, (newPost)],
+                newPostText: ''
+            };
+
+        }
+
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+        }
+
 
         default:
             return state;
