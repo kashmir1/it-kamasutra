@@ -8,7 +8,7 @@ let Users = (props) => {
     // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 50; i++) {
         pages.push(i)
     }
 
@@ -42,14 +42,14 @@ let Users = (props) => {
                 </div>
                 </span>
                     <span>
-                <span>
-                <div>{u.name}</div>
-                <div>{u.status}</div>
-                </span>
-                <span>
-                <div>{"u.location.country"}</div>
-                <div>{"u.location.city"}</div>
-                </span>
+                        <span>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </span>
+                    <span>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
+                    </span>
                 </span>
                 </div>)
             }
