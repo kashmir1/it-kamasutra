@@ -1,25 +1,27 @@
 const SET_USER_DATA = 'SET_USER_DATA';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 const initialState = {
     userId: null,
     email: null,
     login: null,
+    isAuth: false,
     isFetching: true,
 };
 
-const usersReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case FOLLOW:
+        case SET_USER_DATA: {
+            debugger;
+
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: true }
-                    }
-                    return u;
-                })
-            };
+                ...action.data, // ... потому что объект?
+                isAuth: true
+
+            }
+        }
 
 
         case TOGGLE_IS_FETCHING: {
@@ -32,13 +34,8 @@ const usersReducer = (state = initialState, action) => {
 };
 
 
-export const follow = (userId) => ({ type: FOLLOW, userId });
-export const unfollow = (userId) => ({ type: UNFOLLOW, userId });
-export const setUsers = (users) => ({ type: SET_USERS, users });
-export const setString = () => ({ type: SET_STRING });
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
-export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
+export const setAuthUserData = (userId, email, login) =>  ({ type: SET_USER_DATA, data: {userId, email, login}})
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
 
-export default usersReducer;
+export default authReducer;
