@@ -10,14 +10,13 @@ import {
 import axios from "axios";
 import Users from './Users';
 import Preloader from "../Common/Preloader/Preloader";
-import { getUsers, usersAPI } from "../../api/api";
+import { usersAPI } from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
-                debugger
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(data.items);
                 this.props.setTotalUsersCount(data.totalCount);
@@ -37,7 +36,6 @@ class UsersContainer extends React.Component {
     };
 
     render() {
-//test
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}

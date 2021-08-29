@@ -16,3 +16,28 @@ export const usersAPI = {
             })
     }
 }
+
+export const authUsersAPI = {
+    getUserName () {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+export const followUsersToggleAPI = {
+    unfollowUser (id) {
+        return instance.delete(`follow/` + id)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    followUser (id) {
+        return instance.post(`follow/` + id, {})
+            .then(response => {
+                return response.data
+            })
+    }
+}
