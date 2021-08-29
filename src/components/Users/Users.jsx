@@ -35,27 +35,28 @@ let Users = (props) => {
                 </div>
                 <div>
                 { u.followed
-                    ? <button disabled={props.followingInProgress} onClick={ () => {
-                        props.toggleFollowingProgress(true);
+                    // если в массиве хоть один id равна id пользователя, то дизейбл
+                    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => {
+                        props.toggleFollowingProgress(true, u.id);
                         followUsersToggleAPI.unfollowUser(u.id)
                             .then(data => {
                                 if (data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
-                                props.toggleFollowingProgress(false);
+                                props.toggleFollowingProgress(false, u.id);
 
                             });
                     } }>Unfollow</button>
-                    : <button disabled={props.followingInProgress} onClick={ () => {
+                    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => {
 
-                        props.toggleFollowingProgress(true);
+                        props.toggleFollowingProgress(true, u.id);
 
                         followUsersToggleAPI.followUser(u.id)
                             .then(data => {
                                 if (data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
-                                props.toggleFollowingProgress(false);
+                                props.toggleFollowingProgress(false, u.id);
 
                             });
                     } }>Follow</button> }

@@ -14,7 +14,7 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: false
+    followingInProgress: [] // если идет подписка, то айдишку сюда закидываем, когда отписка - забирать
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -70,7 +70,16 @@ const usersReducer = (state = initialState, action) => {
         }
 
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
-            return { ...state, followingInProgress: action.isFollowing }
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    // если ис фетчинг - тру, то мы не делаем фильррацию, а в конец массива добисываем айди, который приходит в экшене
+                    ? [...state.followingInProgress, action.userId]
+
+                    // если к нам пришла подписка, то мы должны отфильтровать ненужного пользователя
+                    // методом фильр мы пропускаем только ту айди, которая не равна той айди, которая пришла в экшене
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         }
 
         default:
@@ -86,7 +95,7 @@ export const setString = () => ({ type: SET_STRING });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
-export const toggleFollowingProgress = (isFollowing) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing });
+export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
 
 
 export default usersReducer;
