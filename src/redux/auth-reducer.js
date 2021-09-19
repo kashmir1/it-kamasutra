@@ -1,5 +1,4 @@
-import { authUsersAPI, followUsersToggleAPI } from "../api/api";
-import { toggleFollowingProgress, unfollowSuccess } from "./users-reducer";
+import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
@@ -39,17 +38,15 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login) =>  ({ type: SET_USER_DATA, data: {userId, email, login}});
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        authUsersAPI.getUserName()
-            .then(data => {
-                //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
-                if (data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
-                    let {id, login, email} = data.data;
-                    dispatch(setAuthUserData(id, email, login));
-                }
-            });
-    }
+export const getAuthUserData = () => (dispatch) => {
+    authAPI.getProfileName()
+        .then(data => {
+            //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
+            if (data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
+                let {id, login, email} = data.data;
+                dispatch(setAuthUserData(id, email, login));
+            }
+        });
 };
 
 
