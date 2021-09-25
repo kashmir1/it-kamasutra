@@ -2,7 +2,8 @@ import React from 'react';
 import classes from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogsItem from "./DialogItem/DialogsItem";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialog-reducer";
+import { addMessageActionCreator, updateNewMessageTextActionCreator } from "../../redux/dialog-reducer";
+import { Redirect } from "react-router-dom";
 
 const Dialogs = (props) => {
 
@@ -24,6 +25,7 @@ const Dialogs = (props) => {
         props.onMessageChange(text)
     };
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>;
     return (
         <div className={classes.dialogs}>
             <div><textarea

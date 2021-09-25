@@ -2,6 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Preloader from "../Common/Preloader/Preloader";
+import { Redirect } from "react-router-dom";
 
 const Profile = (props) => {
 
