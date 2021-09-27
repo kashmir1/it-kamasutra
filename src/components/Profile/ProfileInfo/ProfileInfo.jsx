@@ -5,17 +5,19 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
-        return <Preloader />
+        return <Preloader/>
     }
     return (
         <div>
 
             <div className={classes.descriptionBlock}>
                 <img src={props.profile.photos.large} alt=""/>
-                <ProfileStatus status={'Дуй на собесы'} />
+                <ProfileStatus status={props.status}
+                               updateStatus={props.updateStatus}
+                />
             </div>
 
-            <div>{props.profile.fullName}</div>
+            <div>{props.profile.fullName}424234234</div>
             <div>{props.profile.lookingForAJob ? 'Ищу канеш' : props.profile.lookingForAJobDescription}</div>
             <div>
                 <h3>Контакты</h3>
