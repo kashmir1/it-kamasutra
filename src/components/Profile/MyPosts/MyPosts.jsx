@@ -1,6 +1,23 @@
 import React from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
+import { Field, reduxForm } from "redux-form";
+
+const MyPostsForm = (props) => {
+    return (
+        <div>
+            <form onSubmit={props.handleSubmit}>
+                <Field name={'newPost'} component={'textarea'} />
+                <button>New post</button>
+            </form>
+        </div>
+    )
+};
+
+const MyPostsReduxForm = reduxForm({
+    // a unique name for the form
+    form: 'myPost'
+})(MyPostsForm);
 
 
 const MyPosts = (props) => {
@@ -10,30 +27,15 @@ const MyPosts = (props) => {
         likeCount={p.likeCount}
     />);
 
-    let newPostElement = React.createRef();
 
-    let onAddPost = () => {
-        props.addPost();
+    let onAddPost = (values) => {
+        props.addPost(values.newPost);
     };
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-
-    };
-
 
     // cmd + alt + v = новая переменная
     return <div className={classes.postsWrapper}>
         <h3>My posts</h3>
-        <div><textarea
-            ref={newPostElement}
-            value={props.newPostText}
-            onChange={onPostChange}
-        /></div>
-        <div>
-            <button onClick={onAddPost}>New post</button>
-        </div>
+        <MyPostsReduxForm onSubmit={onAddPost}/>
         <div>
             {postsElements}
         </div>
