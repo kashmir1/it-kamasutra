@@ -2,12 +2,9 @@ import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/img/user.png";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { followUsersToggleAPI } from "../../api/api";
 
 let Users = (props) => {
 
-    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
 
     for (let i = 1; i <= 50; i++) {
