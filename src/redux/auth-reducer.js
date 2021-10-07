@@ -1,4 +1,5 @@
 import { authAPI } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
@@ -18,8 +19,7 @@ const authReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                ...action.data, // ... потому что объект?
-                isAuth: true
+                ...action.payload, // ... потому что объект?
 
             }
         }
@@ -35,21 +35,44 @@ const authReducer = (state = initialState, action) => {
 };
 
 
-export const setAuthUserData = (userId, email, login) =>  ({ type: SET_USER_DATA, data: {userId, email, login}});
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: { userId, email, login, isAuth }
+});
 
 export const getAuthUserData = () => (dispatch) => {
     authAPI.getProfileName()
         .then(data => {
             //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
             if (data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
-                let {id, login, email} = data.data;
-                dispatch(setAuthUserData(id, email, login));
+                let { id, login, email } = data.data;
+                dispatch(setAuthUserData(id, email, login, true));
             }
         });
 };
 
+export const login = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
+            if (response.data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
+                dispatch(getAuthUserData());
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+                dispatch(stopSubmit('login', {_error: message}))
+            }
+        });
+};
 
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
+            if (response.data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
+                dispatch(setAuthUserData(null, null, null, false));
+            }
+        });
+};
 
 
 export default authReducer;

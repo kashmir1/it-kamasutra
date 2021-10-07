@@ -7,3 +7,9 @@
     color: pink;
 }
 
+.formSummaryError {
+    border: 4px solid pink;
+    color: pink;
+    padding: 1rem;
+    margin: 1rem;
+}
