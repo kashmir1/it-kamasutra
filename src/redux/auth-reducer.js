@@ -41,7 +41,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 });
 
 export const getAuthUserData = () => (dispatch) => {
-    authAPI.getProfileName()
+    return authAPI.getProfileName()
         .then(data => {
             //Проверка - если в дате сидит resultCode = 0 (все хорошо, мы залогинены), кто в этом случае мы диспатчим авторизационные данные
             if (data.resultCode === 0) { // тут был косяк, 0 - число, а я указал строку
